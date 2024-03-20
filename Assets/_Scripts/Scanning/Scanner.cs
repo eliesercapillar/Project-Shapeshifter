@@ -1,6 +1,5 @@
 using UnityEngine;
 using Cinemachine;
-using System.Collections.Generic;
 using DesignPatterns;
 
 namespace Player
@@ -61,14 +60,13 @@ namespace Player
 
         private void PerformScan()
         {
-            //_aimRay = _camera.ScreenPointToRay(new Vector3(Screen.width/2, Screen.height/2, 0));
             _aimRay = _camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
             RaycastHit hitInfo;
             if (Physics.Raycast(_aimRay, out hitInfo, _scanDistance))
             {
-                if (hitInfo.collider.tag != "ScannableEnemy") return;
-                
                 ScannableUnit unit = hitInfo.collider.GetComponent<ScannableUnit>();
+                if (unit == null) return;
+                
                 _unitInFocus.Value = unit;
                 // _isScanning.Value = true; // Out of scope. Work on later.
                 unit.ScanUnit();

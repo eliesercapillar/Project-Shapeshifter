@@ -14,7 +14,10 @@ public enum UnitType
 public class ScannableUnitProperties : ScriptableObject
 {
     public UnitType _unitType;
-    public float _scanAmount = 100.0f;
-    public float _scanRate;
+    public GameObject _scannedUnitPfb;
+
+    // Scanning Properties
+    public float _scanIncrementRate;
+    public float _scanDecrementRate;
     public float _cdWaitTime;
 }

@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: ScanUnit_Goblin
   m_EditorClassIdentifier: 
   _unitType: 2
-  _scanRate: 5
+  _scannedUnitPfb: {fileID: 289611166672267156, guid: ebbddf90d4d01e74b8a85fabf996d5db, type: 3}
+  _scanIncrementRate: 5
+  _scanDecrementRate: 2.5
   _cdWaitTime: 0.5

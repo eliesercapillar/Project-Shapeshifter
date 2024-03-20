@@ -1,7 +1,5 @@
 using Player;
 using UnityEngine;
-using UnityEngine.UI;
-using DG.Tweening;
 
 public abstract class ScanningUI: MonoBehaviour
 {

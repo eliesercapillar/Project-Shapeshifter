@@ -3,15 +3,11 @@ using UnityEngine;
 
 public class Goblin : Monster
 {
-    private void Start()
+    protected override void Start()
     {
-
+        base.Start();
     }
 
-    private void Update()
-    {
-        
-    }
 
 
 }
