@@ -70,16 +70,17 @@ namespace Managers
         {
             if (progress < 100.0f) return;
             //if (!_scannedUnits.Contains(_currentUnit.PlayableUnitGameObject)) _scannedUnits.Add(_currentUnit.PlayableUnitGameObject);
-            if (!_isTransformed) AttemptTransformation(_currentUnit.PlayableUnitGameObject);
+            if (!_isTransformed) AttemptTransformation(_currentUnit.PlayableUnitGameObject, _currentUnit.MonsterProperties);
         }
 
-        private void AttemptTransformation(GameObject newForm)
+        private void AttemptTransformation(GameObject newForm, MonsterProperties mp)
         {
             _isTransformed = true;
             _hero.gameObject.SetActive(false);
             GameObject go = Instantiate(newForm, _hero.transform.position, _hero.transform.rotation);
-            _hero = go.AddComponent<Hero>();
             _cameraManager.UpdateVCams(go);
+            _hero = go.AddComponent<Hero>();
+            //_hero.MonsterProperties = mp;
         }
     }
 }

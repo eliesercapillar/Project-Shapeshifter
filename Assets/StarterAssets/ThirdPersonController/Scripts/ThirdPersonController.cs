@@ -182,6 +182,7 @@ namespace StarterAssets
                 transform.position.z);
             Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers,
                 QueryTriggerInteraction.Ignore);
+            Debug.Log($"Grounded returned {Grounded} and it watched checked from position {spherePosition}");
 
             // update animator if using character
             if (_hasAnimator)
@@ -304,6 +305,7 @@ namespace StarterAssets
                 {
                     // the square root of H * -2 * G = how much velocity needed to reach desired height
                     _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+                    Debug.Log($"Applying vertical velocity of {_verticalVelocity}");
 
                     // update animator if using character
                     if (_hasAnimator)
@@ -345,6 +347,7 @@ namespace StarterAssets
             if (_verticalVelocity < _terminalVelocity)
             {
                 _verticalVelocity += Gravity * Time.deltaTime;
+                Debug.Log($"Applying gravity to vertical velocity, resulting in {_verticalVelocity}");
             }
         }
 

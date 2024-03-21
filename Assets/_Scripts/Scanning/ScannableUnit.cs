@@ -16,6 +16,7 @@ public abstract class ScannableUnit : MonoBehaviour
 
     public Observer<float> ScanProgress { get { return _scanProgress; } }
     public GameObject PlayableUnitGameObject { get { return _scannableUnit._scannedUnitPfb; } }
+    public MonsterProperties MonsterProperties { get { return _scannableUnit._monsterProperties; } }
 
     protected void Awake()
     {

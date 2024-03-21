@@ -19,6 +19,7 @@ namespace Player
 
         private Observer<bool> _isScanning = new Observer<bool>(false);
         private Observer<ScannableUnit> _unitInFocus = new Observer<ScannableUnit>(null);
+        private ScannableUnit _scanningUnit = null;
 
         public Observer<bool> IsScanning { get { return _isScanning; } }
         public Observer<ScannableUnit> UnitInFocus { get { return _unitInFocus; } }
@@ -29,10 +30,22 @@ namespace Player
             _camera = Camera.main;
         }
 
-        void Start()
+        private void Start()
         {
 
         }
+
+        private void OnEnable()
+        {
+            _unitInFocus.AddListener(OnUnitChange);
+        }
+
+        private void OnDisable()
+        {
+            _unitInFocus.RemoveListener(OnUnitChange);
+            if (_unitInFocus.Value != null) _unitInFocus.Value.ScanProgress.RemoveListener(OnProgressUpdate);
+        }
+
 
         void Update()
         {
@@ -58,6 +71,22 @@ namespace Player
             }
         }
 
+        #region Callbacks
+
+        private void OnUnitChange(ScannableUnit unit)
+        {
+            if (_scanningUnit != null) _scanningUnit.ScanProgress.RemoveListener(OnProgressUpdate);
+            _scanningUnit = unit;
+            if (_scanningUnit != null) _scanningUnit.ScanProgress.AddListener(OnProgressUpdate);
+        }
+
+        private void OnProgressUpdate(float progress)
+        {
+            
+        }
+
+        #endregion Callbacks
+
         private void PerformScan()
         {
             _aimRay = _camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
@@ -66,7 +95,6 @@ namespace Player
             {
                 ScannableUnit unit = hitInfo.collider.GetComponent<ScannableUnit>();
                 if (unit == null) return;
-                
                 _unitInFocus.Value = unit;
                 // _isScanning.Value = true; // Out of scope. Work on later.
                 unit.ScanUnit();

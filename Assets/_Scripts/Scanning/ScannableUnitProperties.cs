@@ -15,6 +15,7 @@ public class ScannableUnitProperties : ScriptableObject
 {
     public UnitType _unitType;
     public GameObject _scannedUnitPfb;
+    public MonsterProperties _monsterProperties;
 
     // Scanning Properties
     public float _scanIncrementRate;
